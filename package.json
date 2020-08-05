@@ -11,21 +11,21 @@
     "url": "https://github.com/letranloc/draft-js-katex-plugin/issues"
   },
   "dependencies": {
-    "aphrodite": "^1.2.3",
-    "decorate-component-with-props": "^1.0.2",
     "draft-js": ">=0.9.1",
-    "jquery": "^3.2.1",
     "katex": "^0.8.3",
-    "math-input": "github:letranloc/math-input#web-support",
-    "mathquill": "^0.10.1-a",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-pure-render-mixin": "^15.6.0",
+    "react-mathquill": "^0.2.6",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "union-class-names": "^1.0.0"
+    "styled-components": "^5.1.1",
+    "use-hooks": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@storybook/react": "^3.2.8",
+    "@types/draft-js": "^0.10.43",
+    "@types/katex": "^0.11.0",
+    "@types/storybook__react": "^5.2.1",
     "asciimath-to-latex": "^0.3.2",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.14.0",
@@ -38,7 +38,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.27.2",
-    "draft-js-plugins-editor": "2.0.0-rc7",
+    "draft-js-plugins-editor": "^3.0.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -54,6 +54,8 @@
     "react-dom": "^15.4.2",
     "rimraf": "^2.6.1",
     "style-loader": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.7",
     "webpack": "^2.2.1"
   },
   "homepage": "https://github.com/letranloc/draft-js-katex-plugin",
@@ -82,15 +84,14 @@
     "url": "https://github.com/letranloc/draft-js-katex-plugin.git"
   },
   "scripts": {
-    "build": "npm run clean && npm run build:js && npm run build:css",
-    "build:css": "node ./scripts/concatCssFiles $(pwd) && rimraf lib-css",
+    "build": "yarn cache clean && yarn build:js",
     "build:js": "WEBPACK_CONFIG=$(pwd)/webpack.config.js BABEL_DISABLE_CACHE=1 BABEL_ENV=production NODE_ENV=production babel --out-dir='lib' --ignore='__test__/*' src",
     "clean": "rimraf lib storybook-static",
-    "lint": "npm run lint:eslint",
+    "lint": "yarn lint:eslint",
     "lint:eslint": "eslint --rule 'mocha/no-exclusive-tests:2' ./",
     "lint:eslint:fix": "eslint --fix --rule 'mocha/no-exclusive-tests:2' ./",
     "lint:staged": "lint-staged",
-    "prepublish": "npm run build",
+    "prepublish": "yarn build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "WEBPACK_CONFIG=$(pwd)/webpack.config.js BABEL_DISABLE_CACHE=1 build-storybook -c .storybook -o storybook-static"
   }
